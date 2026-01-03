@@ -2,37 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Azisiwe Baba | Portfolio</title>
-  
-  <!-- HTML -->
-  <link rel="stylesheet" href="mediaqueries.css" title="" type="" />
 
-  <!-- Custom Styles -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mediaqueries.css">
 </head>
-
 <body>
+
+  <!-- Desktop Navigation -->
   <nav id="desktop-nav">
-    <div class="logo"A.Baba</div>
-    </div>
-    <div >
-      <ul class="nav-links">
+    <div class="logo">A.Baba</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hamburger Navigation -->
+  <nav id="hamburger-nav">
+    <div class="logo">A.Baba</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" aria-label="Toggle navigation menu" aria-controls="menu-links" aria-expanded="false" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="menu-links" id="menu-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="blog">Blog</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
-  
-  <nav id="hamburger-nav">
-    <div class="logo"></div>A.Baba</div>
-    
-  </nav>
-  <!-- Project -->
+
+  <!-- Sections -->
+  <section id="home">
+    <div class="section_pic-container">
+      <img src="./asserts/pro-img/profile-img.jpeg" alt="Azisiwe Baba Profile Picture">
+    </div>
+    <div class="section_text">
+      <p>Hey, I'm</p>
+      <h1 class="title">Azisiwe Baba</h1>
+      <p>
+        I am a hardworking and motivated individual with experience in sales, food production, and customer service. 
+        I also work as a hairdresser, combining creativity with professionalism. I enjoy working with people, communicating clearly, and delivering quality results.
+      </p>      
+      <div class="btn-container">
+        <button class="btn btn-color-2" onclick="window.open('./asserts/docs/Azisiwe\'s CV.pdf')">Download CV</button>
+        <button class="btn btn-color-1" onclick="location.href='#contact'">Contact Info</button>
+      </div>
+      <div class="social-icon">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
   <script src="main.js"></script>
 </body>
 </html>

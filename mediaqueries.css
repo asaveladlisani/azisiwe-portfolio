@@ -1,0 +1,83 @@
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+
+  #desktop-nav { display: none; }
+
+  #hamburger-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .hamburger-menu {
+    position: relative;
+  }
+
+  .hamburger-icon {
+    width: 30px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  .hamburger-icon span {
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .menu-links.open { max-height: 400px; }
+
+  .menu-links li { list-style: none; width: 100%; }
+
+  .menu-links a {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    color: black;
+  }
+
+  .menu-links a:hover, .menu-links a:focus { background-color: #eee; }
+
+  /* Home section adjustments */
+  #home {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .section_pic-container { width: 250px; height: 250px; }
+  .title { font-size: 2rem; }
+  .section_text p { font-size: 1rem; }
+  .btn { width: 100%; margin: 0.5rem 0; }
+
+}
