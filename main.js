@@ -114,15 +114,18 @@ function initScrollAnimations() {
 // Contact form handling
 function initContactForm() {
   const contactForm = document.getElementById('contactForm');
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-
   if (!contactForm) return;
 
-  contactForm.addEventListener('submit', async function (e) {
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
+
+    // ✅ Add access key ONLY here
     formData.append("access_key", "f2e8c0f0-0754-4905-b96d-4a1c746ed822");
+    formData.append("subject", "New Portfolio Contact Message");
 
     const name = formData.get('name');
     const email = formData.get('email');
@@ -130,12 +133,12 @@ function initContactForm() {
 
     // ✅ Validation
     if (!name || !email || !message) {
-      showNotification('Please fill in all fields', 'error');
+      showNotification("Please fill in all fields", "error");
       return;
     }
 
     if (!isValidEmail(email)) {
-      showNotification('Please enter a valid email address', 'error');
+      showNotification("Please enter a valid email address", "error");
       return;
     }
 
@@ -152,20 +155,24 @@ function initContactForm() {
       const data = await response.json();
 
       if (response.ok) {
-        showNotification("Thank you! Your message has been sent.", "success");
+        showNotification("Message sent successfully! Thank you.", "success");
         contactForm.reset();
       } else {
-        showNotification(data.message || "Something went wrong.", "error");
+        showNotification(data.message || "Failed to send message.", "error");
       }
 
     } catch (error) {
-      showNotification("Network error. Please try again later.", "error");
+      showNotification("Network error. Please try again.", "error");
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     }
   });
 }
+
+// ✅ Make sure this runs
+initContactForm();
+
 
 
 // Email validation helper
