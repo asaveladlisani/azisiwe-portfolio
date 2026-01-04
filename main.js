@@ -7,44 +7,59 @@ function initNavigation() {
 
   // Toggle hamburger menu
   function toggleMenu() {
-    const isOpen = menuLinks.classList.toggle('open');
-    hamburgerIcon.classList.toggle('open');
-    hamburgerIcon.setAttribute('aria-expanded', isOpen);
-    menuLinks.setAttribute('aria-hidden', !isOpen);
+  const isOpen = menuLinks.classList.toggle("open");
+  hamburgerIcon.classList.toggle("open");
 
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  // Accessibility
+  hamburgerIcon.setAttribute("aria-expanded", isOpen);
+  menuLinks.setAttribute("aria-hidden", !isOpen);
+
+  // Lock body scroll
+  if (isOpen) {
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+  } else {
+    document.body.style.position = "";
+    document.body.style.width = "";
   }
+}
 
-  hamburgerIcon.addEventListener('click', toggleMenu);
-  hamburgerIcon.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleMenu();
-    }
-  });
+// Click + keyboard
+hamburgerIcon.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu();
+});
 
-  // Close menu on link click
-  document.querySelectorAll('.menu-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      menuLinks.classList.remove('open');
-      hamburgerIcon.classList.remove('open');
-      hamburgerIcon.setAttribute('aria-expanded', 'false');
-      menuLinks.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = 'auto';
-    });
-  });
+hamburgerIcon.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    toggleMenu();
+  }
+});
 
-  // Close menu on outside click
-  document.addEventListener('click', (e) => {
-    if (!hamburgerIcon.contains(e.target) && !menuLinks.contains(e.target)) {
-      menuLinks.classList.remove('open');
-      hamburgerIcon.classList.remove('open');
-      hamburgerIcon.setAttribute('aria-expanded', 'false');
-      menuLinks.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = 'auto';
-    }
+// Close when clicking a menu link
+menuLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    menuLinks.classList.remove("open");
+    hamburgerIcon.classList.remove("open");
+    hamburgerIcon.setAttribute("aria-expanded", "false");
+    menuLinks.setAttribute("aria-hidden", "true");
+    document.body.style.position = "";
+    document.body.style.width = "";
   });
+});
+
+// Close when clicking outside
+document.addEventListener("click", (e) => {
+  if (!hamburgerIcon.contains(e.target) && !menuLinks.contains(e.target)) {
+    menuLinks.classList.remove("open");
+    hamburgerIcon.classList.remove("open");
+    hamburgerIcon.setAttribute("aria-expanded", "false");
+    menuLinks.setAttribute("aria-hidden", "true");
+    document.body.style.position = "";
+    document.body.style.width = "";
+  }
+});
 
   // Active link highlighting on scroll
   let ticking = false;
