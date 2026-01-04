@@ -170,11 +170,6 @@ function initContactForm() {
   });
 }
 
-// ✅ Make sure this runs
-initContactForm();
-
-
-
 // Email validation helper
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
