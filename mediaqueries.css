@@ -82,7 +82,7 @@
   /* Home section adjustments */
   #home {
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     padding: 5rem 1.5rem 3rem;
     min-height: 100vh;
   }
