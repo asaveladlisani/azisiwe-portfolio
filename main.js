@@ -114,35 +114,59 @@ function initScrollAnimations() {
 // Contact form handling
 function initContactForm() {
   const contactForm = document.getElementById('contactForm');
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+  if (!contactForm) return;
 
-      const formData = new FormData(this);
-      const name = formData.get('name');
-      const email = formData.get('email');
-      const message = formData.get('message');
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-      // Basic validation
-      if (!name || !email || !message) {
-        showNotification('Please fill in all fields', 'error');
-        return;
+    const formData = new FormData(contactForm);
+    formData.append("access_key", "f2e8c0f0-0754-4905-b96d-4a1c746ed822");
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+
+    // ✅ Validation
+    if (!name || !email || !message) {
+      showNotification('Please fill in all fields', 'error');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      showNotification('Please enter a valid email address', 'error');
+      return;
+    }
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showNotification("Thank you! Your message has been sent.", "success");
+        contactForm.reset();
+      } else {
+        showNotification(data.message || "Something went wrong.", "error");
       }
 
-      if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address', 'error');
-        return;
-      }
-
-      // Simulate form submission (replace with actual submission logic)
-      showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-
-      // Reset form
-      this.reset();
-    });
-  }
+    } catch (error) {
+      showNotification("Network error. Please try again later.", "error");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
 }
+
 
 // Email validation helper
 function isValidEmail(email) {
